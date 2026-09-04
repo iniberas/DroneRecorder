@@ -1,0 +1,16 @@
+services:
+  sbc:
+    build:
+      context: .
+      target: sbc
+    container_name: vtol_sbc
+    network_mode: host
+    privileged: true
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/home/pilot/workspace
+      - /dev:/dev
+    stdin_open: true
+    tty: true
+    command: bash -c "source /opt/ros/jazzy/setup.bash && python3 app.py"
