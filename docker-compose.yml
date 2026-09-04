@@ -3,6 +3,7 @@ services:
     build:
       context: .
       target: sbc
+    restart: unless-stopped
     container_name: vtol_sbc
     network_mode: host
     privileged: true
@@ -11,6 +12,7 @@ services:
     volumes:
       - ./workspace:/home/pilot/workspace
       - /dev:/dev
+      - /mnt/ssd:/mnt/ssd
     stdin_open: true
     tty: true
     command: bash -c "source /opt/ros/jazzy/setup.bash && python3 app.py"
